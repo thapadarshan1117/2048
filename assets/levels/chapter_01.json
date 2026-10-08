@@ -1,0 +1,838 @@
+{
+ "chapter": 1,
+ "theme": "theme_dawn",
+ "nameKey": "chapter_1",
+ "startLevel": 1,
+ "endLevel": 25,
+ "levels": [
+  {
+   "id": 1,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 20
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 100,
+    "threeStar": 500
+   },
+   "curated": true,
+   "tutorialStep": "tut_drop"
+  },
+  {
+   "id": 2,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 60
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 150,
+    "threeStar": 800
+   },
+   "curated": true,
+   "tutorialStep": "tut_merge"
+  },
+  {
+   "id": 3,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 150
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 250,
+    "threeStar": 1200
+   },
+   "curated": true,
+   "tutorialStep": "tut_merge_again"
+  },
+  {
+   "id": 4,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 300
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 90,
+     "4": 10
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 4,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 400,
+    "threeStar": 1546
+   },
+   "curated": true,
+   "tutorialStep": "tut_chain"
+  },
+  {
+   "id": 5,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 500
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 85,
+     "4": 15
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 4,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 500,
+    "threeStar": 1380
+   },
+   "curated": true
+  },
+  {
+   "id": 6,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 900
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 80,
+     "4": 20
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 4,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 800,
+    "threeStar": 1801
+   },
+   "curated": true
+  },
+  {
+   "id": 7,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 1400
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 78,
+     "4": 20,
+     "8": 2
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 921,
+    "threeStar": 1535
+   },
+   "curated": true
+  },
+  {
+   "id": 8,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 1200
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 78,
+     "4": 20,
+     "8": 2
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 741,
+    "threeStar": 1234
+   },
+   "curated": true
+  },
+  {
+   "id": 9,
+   "chapter": 1,
+   "objective": {
+    "type": "comboCount",
+    "target": 2
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 78,
+     "4": 20,
+     "8": 2
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 700,
+    "threeStar": 1648
+   },
+   "curated": true
+  },
+  {
+   "id": 10,
+   "chapter": 1,
+   "objective": {
+    "type": "mergeCount",
+    "target": 25
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 75,
+     "4": 22,
+     "8": 3
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 900,
+    "threeStar": 1594
+   },
+   "curated": true,
+   "tutorialStep": "tut_boosters"
+  },
+  {
+   "id": 11,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 1600
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 75,
+     "4": 22,
+     "8": 3
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 897,
+    "threeStar": 1494
+   },
+   "curated": true
+  },
+  {
+   "id": 12,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 600
+   },
+   "moveLimit": 60,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 75,
+     "4": 22,
+     "8": 3
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 365,
+    "threeStar": 609
+   },
+   "curated": true
+  },
+  {
+   "id": 13,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 32
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 75,
+     "4": 22,
+     "8": 3
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 333,
+    "threeStar": 554
+   },
+   "curated": true
+  },
+  {
+   "id": 14,
+   "chapter": 1,
+   "objective": {
+    "type": "comboCount",
+    "target": 3
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 74,
+     "4": 22,
+     "8": 4
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 987,
+    "threeStar": 1644
+   },
+   "curated": true
+  },
+  {
+   "id": 15,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 2200
+   },
+   "moveLimit": null,
+   "initialBlocks": [
+    {
+     "value": 2,
+     "row": 11,
+     "column": 0
+    },
+    {
+     "value": 4,
+     "row": 11,
+     "column": 1
+    },
+    {
+     "value": 2,
+     "row": 10,
+     "column": 0
+    },
+    {
+     "value": 8,
+     "row": 11,
+     "column": 5
+    }
+   ],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 74,
+     "4": 22,
+     "8": 4
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 1100,
+    "threeStar": 1929
+   },
+   "curated": true
+  },
+  {
+   "id": 16,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 64
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 72,
+     "4": 23,
+     "8": 5
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 432,
+    "threeStar": 719
+   },
+   "curated": true
+  },
+  {
+   "id": 17,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 128
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 70,
+     "4": 24,
+     "8": 6
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 1041,
+    "threeStar": 1735
+   },
+   "curated": true
+  },
+  {
+   "id": 18,
+   "chapter": 1,
+   "objective": {
+    "type": "comboCount",
+    "target": 4
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 68,
+     "4": 25,
+     "8": 7
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 1108,
+    "threeStar": 1847
+   },
+   "curated": true
+  },
+  {
+   "id": 19,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 256
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 66,
+     "4": 26,
+     "8": 8
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 2000,
+    "threeStar": 4422
+   },
+   "curated": true
+  },
+  {
+   "id": 20,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 512
+   },
+   "moveLimit": null,
+   "initialBlocks": [
+    {
+     "value": 4,
+     "row": 11,
+     "column": 2
+    },
+    {
+     "value": 8,
+     "row": 11,
+     "column": 3
+    },
+    {
+     "value": 16,
+     "row": 10,
+     "column": 2
+    }
+   ],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 62,
+     "4": 27,
+     "8": 11
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 8,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 6000,
+    "threeStar": 14169
+   },
+   "curated": true
+  },
+  {
+   "id": 21,
+   "chapter": 1,
+   "objective": {
+    "type": "reachNumber",
+    "target": 16
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 300,
+    "threeStar": 450
+   },
+   "curated": false
+  },
+  {
+   "id": 22,
+   "chapter": 1,
+   "objective": {
+    "type": "comboCount",
+    "target": 5
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 850,
+    "threeStar": 1300
+   },
+   "curated": false
+  },
+  {
+   "id": 23,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 1700
+   },
+   "moveLimit": 168,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 100
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 2,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 850,
+    "threeStar": 1300
+   },
+   "curated": false
+  },
+  {
+   "id": 24,
+   "chapter": 1,
+   "objective": {
+    "type": "reachScore",
+    "target": 1800
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 90,
+     "4": 10
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 4,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 750,
+    "threeStar": 1200
+   },
+   "curated": false
+  },
+  {
+   "id": 25,
+   "chapter": 1,
+   "objective": {
+    "type": "createNumber",
+    "target": 32
+   },
+   "moveLimit": null,
+   "initialBlocks": [],
+   "allowedBoosters": [
+    "undo",
+    "hammer",
+    "shuffle"
+   ],
+   "difficulty": {
+    "spawnWeights": {
+     "2": 90,
+     "4": 10
+    },
+    "spawnProbability": 1.0,
+    "maxSpawnValue": 4,
+    "targetScore": 0,
+    "restriction": "none",
+    "moveLimit": null,
+    "chainBonusMultiplier": 1.0
+   },
+   "stars": {
+    "twoStar": 275,
+    "threeStar": 425
+   },
+   "curated": false
+  }
+ ]
+}
