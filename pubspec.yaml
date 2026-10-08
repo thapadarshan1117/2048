@@ -1,0 +1,46 @@
+name: merge_drop
+description: MERGE DROP - an original number merge / drop puzzle game built with Flutter and Flame.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # --- Rendering / gameplay ---
+  flame: ^1.18.0
+  flame_audio: ^2.1.0
+
+  # --- State management ---
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+
+  # --- Navigation ---
+  go_router: ^14.6.2
+
+  # --- Persistence (offline-first MVP storage) ---
+  shared_preferences: ^2.3.3
+
+  # --- Monetization ---
+  google_mobile_ads: ^5.3.1
+  in_app_purchase: ^3.2.2
+
+  # --- Telemetry (optional at runtime, see lib/core/constants/app_config.dart) ---
+  firebase_core: ^3.8.0
+  firebase_analytics: ^11.3.3
+  firebase_crashlytics: ^4.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  # The game renders every block procedurally on a Canvas (no third-party artwork).
+  assets:
+    - assets/levels/
+    - assets/sounds/
+    - assets/music/

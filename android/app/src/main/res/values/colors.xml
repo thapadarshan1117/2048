@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The top of the app's background gradient, so the launch window matches
+         lib/app/theme/app_colors.dart exactly. -->
+    <color name="splash_background">#1B1035</color>
+    <color name="ic_launcher_background">#1B1035</color>
+</resources>
