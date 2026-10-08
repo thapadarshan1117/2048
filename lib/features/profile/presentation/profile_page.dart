@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/localization/app_strings.dart';
@@ -10,9 +11,10 @@ import '../../../core/di/service_locator.dart';
 import '../../../core/widgets/game_button.dart';
 import '../../../core/widgets/gradient_scaffold.dart';
 import '../../../core/widgets/icon_action_button.dart';
-import '../../progression/data/progress_repository.dart';
-import '../../progression/domain/player_progress.dart';
 import '../../progression/domain/milestone.dart';
+import '../../progression/domain/player_progress.dart';
+import '../../progression/presentation/cubit/progression_cubit.dart';
+import '../../progression/presentation/cubit/progression_state.dart';
 import 'widgets/stat_card.dart';
 
 /// Lifetime statistics and achievements.
@@ -21,74 +23,94 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final snapshot = ServiceLocator.instance.progressRepository.read();
-    final progress = snapshot.progress;
-    final stats = snapshot.stats;
+    return BlocProvider<ProgressionCubit>(
+      create: (_) => ProgressionCubit(
+        progressRepository: ServiceLocator.instance.progressRepository,
+      )..load(),
+      child: const _ProfileView(),
+    );
+  }
+}
 
-    return GradientScaffold(
-      appBar: AppBar(
-        leading: IconActionButton(
-          icon: Icons.arrow_back_rounded,
-          onPressed: () => context.pop(),
-        ),
-        title: Text(AppStrings.tr('profile_title')),
-      ),
-      child: ListView(
-        children: <Widget>[
-          Wrap(
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
+class _ProfileView extends StatelessWidget {
+  const _ProfileView();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProgressionCubit, ProgressionState>(
+      builder: (context, state) {
+        final progress = state.progress;
+        final stats = state.stats;
+
+        return GradientScaffold(
+          appBar: AppBar(
+            leading: IconActionButton(
+              icon: Icons.arrow_back_rounded,
+              onPressed: () => context.pop(),
+            ),
+            title: Text(AppStrings.tr('profile_title')),
+          ),
+          child: ListView(
             children: <Widget>[
-              StatCard(
-                label: AppStrings.tr('profile_levels_completed'),
-                value: '${progress.levelsCompleted}',
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.sm,
+                children: <Widget>[
+                  StatCard(
+                    label: AppStrings.tr('profile_levels_completed'),
+                    value: '${progress.levelsCompleted}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_stars_earned'),
+                    value: '${progress.starsEarned}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_total_score'),
+                    value: '${stats.highestScore}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_highest_block'),
+                    value: '${stats.highestBlock}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_best_infinite'),
+                    value: '${stats.infiniteBestScore}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_daily_done'),
+                    value: '${stats.dailyChallengesCompleted}',
+                  ),
+                  StatCard(
+                    label: AppStrings.tr('profile_total_merges'),
+                    value: '${stats.totalMerges}',
+                  ),
+                ],
               ),
-              StatCard(
-                label: AppStrings.tr('profile_stars_earned'),
-                value: '${progress.starsEarned}',
+              const SizedBox(height: AppSpacing.xl),
+              Text(
+                AppStrings.tr('profile_milestones'),
+                style: AppTypography.title,
               ),
-              StatCard(
-                label: AppStrings.tr('profile_total_score'),
-                value: '${stats.highestScore}',
+              const SizedBox(height: AppSpacing.md),
+              ...MilestoneCatalogue.all.map(
+                (milestone) => _MilestoneRow(
+                  milestone: milestone,
+                  progress: progress,
+                  stats: stats,
+                ),
               ),
-              StatCard(
-                label: AppStrings.tr('profile_highest_block'),
-                value: '${stats.highestBlock}',
+              const SizedBox(height: AppSpacing.xl),
+              GameButton(
+                label: AppStrings.tr('nav_shop'),
+                variant: GameButtonVariant.ghost,
+                icon: Icons.storefront_rounded,
+                onPressed: () => context.push('/shop'),
               ),
-              StatCard(
-                label: AppStrings.tr('profile_best_infinite'),
-                value: '${stats.infiniteBestScore}',
-              ),
-              StatCard(
-                label: AppStrings.tr('profile_daily_done'),
-                value: '${stats.dailyChallengesCompleted}',
-              ),
-              StatCard(
-                label: AppStrings.tr('profile_total_merges'),
-                value: '${stats.totalMerges}',
-              ),
+              const SizedBox(height: AppSpacing.xl),
             ],
           ),
-          const SizedBox(height: AppSpacing.xl),
-          Text(AppStrings.tr('profile_milestones'), style: AppTypography.title),
-          const SizedBox(height: AppSpacing.md),
-          ...MilestoneCatalogue.all.map(
-            (milestone) => _MilestoneRow(
-              milestone: milestone,
-              progress: progress,
-              stats: stats,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.xl),
-          GameButton(
-            label: AppStrings.tr('nav_shop'),
-            variant: GameButtonVariant.ghost,
-            icon: Icons.storefront_rounded,
-            onPressed: () => context.push('/shop'),
-          ),
-          const SizedBox(height: AppSpacing.xl),
-        ],
-      ),
+        );
+      },
     );
   }
 }

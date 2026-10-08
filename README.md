@@ -45,8 +45,9 @@ Firebase additionally needs `google-services.json` (Android) /
 deliberately not committed.
 
 See `docs/ARCHITECTURE.md` for the full architecture, `docs/LEVELS.md` for the
-level catalogue, `docs/ANALYTICS.md` for the event list and `docs/TESTING.md`
-for the verification story.
+level catalogue, `docs/ANALYTICS.md` for the event list, `docs/TESTING.md` for
+the verification story and `docs/PLATFORMS.md` for the Android / iOS build
+setup.
 
 ---
 
@@ -73,8 +74,39 @@ for the verification story.
 | Analytics + Crashlytics abstractions with local defaults | Complete |
 | Localisation-ready architecture, English MVP | Complete |
 | Reusable component library + centralised design system | Complete |
-| Unit + integration tests | Complete |
+| Unit + integration tests | Written, see verification note |
 | Dev-only debug panel, compiled out of release builds | Complete |
+| Android + iOS platform targets | Scaffolded, see verification note |
+
+---
+
+## Verification status - read this before you run anything
+
+This repository was authored in an environment **without a Flutter SDK**, so be
+precise about what has and has not been executed:
+
+| Check | Result |
+| --- | --- |
+| `flutter pub get` | never run - no package has been resolved |
+| `flutter analyze` | never run - `tool/check_sources.py` is a structural analyser, not a compiler |
+| `flutter test` | never run - the files under `test/` have never been executed |
+| Android / iOS build | never produced; no app has been installed or run |
+| `tool/check_sources.py` | **116 Dart files, no structural problems** |
+| `tool/check_sources.py --selftest` | **all 4 pinned faults detected** |
+| `tool/mirror/run_tests.py` | **113 tests, all passing** |
+| `tool/mirror/validate_levels.py` | **500 levels: 0 errors, 0 warnings** |
+
+The pure-Dart domain logic *has* genuinely been executed - through a Python
+mirror under `tool/mirror/` that re-implements the same algorithms and runs an
+equivalent suite. That covers the merge engine, gravity, chain resolution,
+scoring, game-over detection, objectives, star thresholds, the seeded generator,
+the level validator, the simulator, the daily seed and the snapshot codec.
+
+It does **not** cover anything that needs a Dart compiler or a device: type
+checking, widget builds, Flame rendering, plugin channels, or whether the app
+launches. `docs/PLATFORMS.md` records the one manual step the Android target
+still needs (the binary `gradle-wrapper.jar`) and the exact first commands to
+run on a real machine.
 
 ---
 
@@ -100,7 +132,8 @@ lib/
         pages/ widgets/ HUD, boosters, result dialog
     levels/             level catalogue, generator, validator, simulator
     progression/        stars, progress, coins, daily rewards, achievements
-    home/ levels/ daily_challenge/ infinite/ settings/ shop/ profile/ monetization/
+    boosters/           booster catalogue, inventory, shop tiles
+    home/ daily_challenge/ settings/ shop/ profile/ monetization/
 ```
 
 ### The three-layer rule
@@ -117,12 +150,19 @@ lib/
 `GameSessionCubit` is the only component that can call `GameEngine`. Flame
 components and widgets emit intents and observe `GameSessionState`.
 
-`tool/check_sources.py` enforces this mechanically - it fails the build if a
-domain file references Flutter or Flame:
+`tool/check_sources.py` enforces this mechanically. It is a structural
+analyser, not a compiler: it resolves imports (including `package:` self
+imports), checks brace/paren balance, bans placeholders, verifies domain-layer
+purity, and reports undefined bare identifiers and missing receivers.
 
 ```bash
-python3 tool/check_sources.py
+python3 tool/check_sources.py            # scan lib/ and test/
+python3 tool/check_sources.py --selftest # prove the analyser still bites
 ```
+
+`--selftest` scans `tool/selftest/faults.dart`, a file that is wrong in four
+deliberate ways, and fails unless every fault is still reported. It exists
+because an analyser that quietly stops reporting is worse than no analyser.
 
 ---
 

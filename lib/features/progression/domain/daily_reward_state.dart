@@ -43,6 +43,17 @@ class DailyRewardState extends Equatable {
   /// Missed days tolerated before the streak resets.
   static const int maxGraceDays = 1;
 
+  /// Rung the next claim will pay out (1-based), wrapping back to day 1 once
+  /// the ladder is complete.
+  ///
+  /// Every caller must go through this rather than doing `streakDay + 1`
+  /// itself: without the wrap, a player sitting on rung 7 would be shown a
+  /// 200-coin reward and then paid the 20-coin rung-one reward.
+  int get nextRung => streakDay >= ladderLength ? 1 : streakDay + 1;
+
+  /// Coins the next claim will pay out.
+  int get nextReward => rewardFor(nextRung);
+
   bool canClaim(String todayKey) {
     if (lastClaimKey == null) return true;
     if (lastClaimKey == todayKey) return false;

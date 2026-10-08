@@ -77,6 +77,14 @@ class GameSessionCubit extends Cubit<GameSessionState> {
 
   // ---------------------------------------------------------------- lifecycle
 
+  /// Builds the opening board for [level]: the level's pre-filled blocks on an
+  /// otherwise empty grid of the standard size.
+  GameBoard _boardForLevel(Level level) => GameEngine.initialBoardForLevel(
+        level,
+        GameConstants.defaultRows,
+        GameConstants.defaultColumns,
+      );
+
   /// Starts [level] from the beginning.
   void startLevel(Level level) {
     _autoSaveTimer?.cancel();
@@ -466,7 +474,7 @@ class GameSessionCubit extends Cubit<GameSessionState> {
       'mode': next.mode.name,
     });
 
-    if (hadMerges) {
+    if (outcome.hadMerges) {
       final biggest = outcome.mergeEvents
           .map((event) => event.newValue)
           .fold<int>(0, (max, value) => value > max ? value : max);

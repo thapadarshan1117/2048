@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import '../../../../app/localization/app_strings.dart';
 import '../../../levels/data/level_repository.dart';
 import '../../../progression/data/progress_repository.dart';
-import '../../../progression/domain/daily_reward_state.dart';
 
 /// Everything the home screen needs to draw itself.
 class HomeState extends Equatable {
@@ -68,13 +67,11 @@ class HomeCubit extends Cubit<HomeState> {
     final progress = _progressRepository.read();
     final daily = progress.dailyReward;
     final canClaim = daily.canClaim(todayKey);
-    final nextDay = daily.lastClaimKey == null ? 1 : daily.streakDay + 1;
 
     emit(HomeState(
       progress: progress,
       totalLevels: _levelRepository.count,
-      dailyRewardCoins:
-          canClaim ? DailyRewardState.rewardFor(nextDay.clamp(1, 7)) : 0,
+      dailyRewardCoins: canClaim ? daily.nextReward : 0,
       hasResumableGame: resumable,
       currentObjectiveText: _objectiveText(progress),
     ));

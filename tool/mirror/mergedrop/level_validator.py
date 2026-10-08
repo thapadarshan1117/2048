@@ -158,10 +158,11 @@ class LevelValidator:
         # Value objectives must be measured with the same generous budget the
         # generator calibrated them with, otherwise a 512 target looks
         # impossible simply because the validator stopped after 120 drops.
-        from .level_generator import _calibration_budget
-        budget = self.simulator.max_moves
-        if level.objective.type in ("createNumber", "reachNumber"):
-            budget = _calibration_budget(level.objective.target, budget)
+        # `calibration_budget_for` (not the raw helper) so a move-limited level
+        # is still judged inside its own limit - exactly what
+        # lib/features/levels/data/level_validator.dart does.
+        from .level_generator import calibration_budget_for
+        budget = calibration_budget_for(level, self.simulator.max_moves)
         simulation = self.simulator.simulate(
             level, games=self.games, seed=validation_seed(level.id),
             skill=self.skill, max_moves=budget)

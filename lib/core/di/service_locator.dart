@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../features/boosters/presentation/cubit/booster_inventory_cubit.dart';
 import '../../features/daily_challenge/data/daily_challenge_repository.dart';
 import '../../features/game/data/game_save_repository.dart';
 import '../../features/levels/data/level_repository.dart';
@@ -42,6 +43,7 @@ class ServiceLocator {
   late final AdsService ads;
   late final PurchaseService purchases;
   late final RemoteConfigService remoteConfig;
+  late final BoosterInventoryCubit boosterInventoryCubit;
 
   bool _ready = false;
 
@@ -107,6 +109,16 @@ class ServiceLocator {
 
     remoteConfig = const LocalRemoteConfigService();
     await remoteConfig.initialize();
+
+    // Coins and booster charges outside a play session. Loaded eagerly so the
+    // shop and the profile never render a stale balance on first frame.
+    boosterInventoryCubit = BoosterInventoryCubit(
+      progressRepository: progressRepository,
+      purchases: purchases,
+      analytics: analytics,
+      settingsRepository: settingsRepository,
+      ads: ads,
+    )..load();
 
     _ready = true;
   }

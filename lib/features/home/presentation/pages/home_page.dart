@@ -15,7 +15,6 @@ import '../../../../core/widgets/gradient_scaffold.dart';
 import '../../../../core/widgets/star_rating.dart';
 import '../../../../core/services/analytics_service.dart';
 import '../../../game/domain/game_snapshot.dart';
-import '../../../progression/domain/daily_reward_state.dart';
 import '../cubit/home_cubit.dart';
 
 /// The first screen the player sees.
@@ -168,23 +167,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// Claims the daily ladder through [BoosterInventoryCubit], the single owner
+  /// of coins, so the reward can never be paid twice or at the wrong rung.
   void _claimDailyReward() {
-    final progress = _cubit.state.progress;
-    final daily = progress.dailyReward;
-    final today = formatDailyKey(DateTime.now());
-    final nextDay = daily.lastClaimKey == null ? 1 : daily.streakDay + 1;
-    final reward = DailyRewardState.rewardFor(nextDay.clamp(1, 7));
-
-    final updated = ServiceLocator.instance.progressRepository.read();
-    ServiceLocator.instance.progressRepository.write(
-      updated.copyWithCoins(updated.coins + reward).copyWithDailyReward(
-            daily.claim(today),
-          ),
-    );
-    ServiceLocator.instance.analytics.logEvent(
-      AnalyticsEvents.dailyRewardClaimed,
-      <String, Object>{'day': nextDay.clamp(1, 7), 'coins': reward},
-    );
+    final locator = ServiceLocator.instance;
+    final coins = locator.boosterInventoryCubit.claimDailyReward();
+    if (coins > 0) {
+      locator.analytics.logEvent(
+        AnalyticsEvents.dailyRewardClaimed,
+        <String, Object>{'coins': coins},
+      );
+    }
     _load();
   }
 }

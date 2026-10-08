@@ -394,9 +394,13 @@ class BoardComponent extends PositionComponent {
 
 /// Local conversion helpers so the component does not need vector_math
 /// extensions under confusing names.
+///
+/// `size` is a `Vector2` holding a width and a height, so a rect built from it
+/// is anchored at the origin - every caller translates it into place itself.
+/// The receiver is written as `this.x` / `this.y` because an unnamed extension
+/// has no way to name what it extends.
 extension on Vector2 {
-  ui.Rect toRect() =>
-      ui.Rect.fromLTWH(x, y, this.toRect().width, this.toRect().height);
+  ui.Rect toRect() => ui.Rect.fromLTWH(0, 0, this.x, this.y);
 
-  ui.Offset toOffset() => ui.Offset(x, y);
+  ui.Offset toOffset() => ui.Offset(this.x, this.y);
 }

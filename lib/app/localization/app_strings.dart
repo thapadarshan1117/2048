@@ -120,6 +120,7 @@ class AppStrings {
     'shop_remove_ads_owned': 'Purchased',
     'shop_restore': 'Restore purchases',
     'shop_buy': 'Buy',
+    'shop_owned': 'Owned',
     'shop_not_enough_coins': 'Not enough coins',
     'shop_pack_small': '500 coins',
     'shop_pack_medium': '1500 coins',

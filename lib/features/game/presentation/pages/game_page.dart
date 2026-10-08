@@ -17,9 +17,11 @@ import '../../../../core/widgets/game_button.dart';
 import '../../../../core/widgets/game_dialog.dart';
 import '../../../../core/widgets/score_display.dart';
 import '../../../../core/widgets/star_rating.dart';
+import '../../../boosters/presentation/booster_catalogue.dart';
 import '../../../daily_challenge/domain/daily_challenge.dart';
 import '../../../levels/domain/level.dart';
 import '../../domain/game_board.dart';
+import '../../domain/boosters/booster_registry.dart';
 import '../../domain/game_engine.dart';
 import '../../domain/game_mode.dart';
 import '../cubit/game_session_cubit.dart';
@@ -443,27 +445,19 @@ class _ObjectiveBar extends StatelessWidget {
 }
 
 /// The booster toolbar.
+///
+/// Order, icons and labels all come from `BoosterCatalogue`, which in turn reads
+/// the localisation keys off each booster - so the HUD can never drift away
+/// from the shop, and no English text is hardcoded here.
 class _BoosterBar extends StatelessWidget {
   const _BoosterBar({required this.state, required this.cubit});
 
   final GameSessionState state;
   final GameSessionCubit cubit;
 
-  static const List<({String id, String label, IconData icon})> _slots =
-      <({String id, String label, IconData icon})>[
-    (id: 'undo', label: 'Undo', icon: Icons.undo_rounded),
-    (id: 'hammer', label: 'Hammer', icon: Icons.hardware_rounded),
-    (id: 'shuffle', label: 'Shuffle', icon: Icons.shuffle_rounded),
-    (id: 'wildcard', label: 'Wild', icon: Icons.auto_awesome_rounded),
-    (id: 'upgrade', label: 'Upgrade', icon: Icons.arrow_circle_up_rounded),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final allowed = state.level?.allowedBoosters;
-    final visible = _slots
-        .where((slot) => allowed == null || allowed.contains(slot.id))
-        .toList();
+    final visible = BoosterCatalogue.visibleIn(state.level?.allowedBoosters);
 
     return Column(
       children: <Widget>[
@@ -486,20 +480,24 @@ class _BoosterBar extends StatelessWidget {
           ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: visible.map((slot) {
+          children: visible.map((entry) {
+            final booster = BoosterRegistry.byId(entry.id);
+            final count = cubit.inventoryOf(entry.id);
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
               child: BoosterButton(
-                label: slot.label,
-                icon: slot.icon,
-                count: cubit.inventoryOf(slot.id),
-                selected: state.activeBoosterId == slot.id,
-                enabled: cubit.inventoryOf(slot.id) > 0,
+                label: booster == null
+                    ? entry.id
+                    : AppStrings.tr(booster.nameKey),
+                icon: entry.icon,
+                count: count,
+                selected: state.activeBoosterId == entry.id,
+                enabled: count > 0,
                 onTap: () {
-                  if (state.activeBoosterId == slot.id) {
+                  if (state.activeBoosterId == entry.id) {
                     cubit.disarmBooster();
                   } else {
-                    cubit.armBooster(slot.id);
+                    cubit.armBooster(entry.id);
                   }
                 },
               ),
