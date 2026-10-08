@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_config.dart';
 import '../../app/localization/app_strings.dart';
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_radius.dart';
 import '../../app/theme/app_spacing.dart';
 import '../../app/theme/app_typography.dart';
-import '../constants/game_constants.dart';
+import '../../features/levels/data/game_simulator.dart';
+import '../../features/levels/data/level_validator.dart';
+import '../constants/app_config.dart';
 import '../di/service_locator.dart';
-import '../services/ads_service.dart';
-import '../services/analytics_service.dart';
-import '../services/audio_service.dart';
-import '../services/haptics_service.dart';
-import '../services/purchase_service.dart';
-import '../services/remote_config_service.dart';
+
 
 /// Developer-only overlay.
 ///
@@ -96,17 +92,88 @@ class _DebugSheet extends StatelessWidget {
                 ),
                 _Action(
                   label: AppStrings.tr('debug_simulate'),
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () => _runSimulation(context),
                 ),
                 _Action(
                   label: AppStrings.tr('debug_validate'),
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () => _validateCatalogue(context),
                 ),
               ],
             ),
             const SizedBox(height: AppSpacing.md),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Runs the Dart simulator over a sample of the catalogue and reports the
+  /// completion rates, so a balance regression is visible without a device.
+  Future<void> _runSimulation(BuildContext context) async {
+    final repository = ServiceLocator.instance.levelRepository;
+    const simulator = GameSimulator(maxMoves: 200, skill: 0.8);
+    final ids = <int>[1, 5, 10, 25, 50, 100, 250, 500];
+    final lines = <String>[];
+    for (final id in ids) {
+      final level = repository.levelById(id);
+      if (level == null) continue;
+      final report = simulator.simulate(level, games: 3, seed: 9001 + id);
+      lines.add(
+        'L$id ${level.objective.type.name} '
+        '${(report.completionRate * 100).round()}% '
+        'avg ${report.averageScore.round()}',
+      );
+    }
+    if (!context.mounted) return;
+    Navigator.of(context).pop();
+    await _showReport(context, AppStrings.tr('debug_simulate'), lines);
+  }
+
+  /// Re-runs the static validator over the whole catalogue.
+  Future<void> _validateCatalogue(BuildContext context) async {
+    final repository = ServiceLocator.instance.levelRepository;
+    const validator = LevelValidator(games: 0);
+    var errors = 0;
+    var warnings = 0;
+    for (final level in repository.levels) {
+      final report = validator.validate(level);
+      errors += report.errors.length;
+      warnings += report.warnings.length;
+    }
+    if (!context.mounted) return;
+    Navigator.of(context).pop();
+    await _showReport(context, AppStrings.tr('debug_validate'), <String>[
+      '${repository.levels.length} levels',
+      '$errors errors',
+      '$warnings warnings',
+    ]);
+  }
+
+  Future<void> _showReport(
+    BuildContext context,
+    String title,
+    List<String> lines,
+  ) {
+    return showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        title: Text(title, style: AppTypography.title),
+        content: SizedBox(
+          width: 320,
+          child: SingleChildScrollView(
+            child: Text(
+              lines.join('\n'),
+              style: AppTypography.caption,
+            ),
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
   }

@@ -4,7 +4,6 @@ import 'dart:ui' as ui;
 import 'package:flame/components.dart';
 
 import '../../../../app/theme/app_colors.dart';
-import '../../domain/block_state.dart';
 
 /// The moving "next block" preview.
 ///

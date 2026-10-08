@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../domain/daily_challenge.dart';
 
 /// Outcome of one daily attempt.
 class DailyAttempt {

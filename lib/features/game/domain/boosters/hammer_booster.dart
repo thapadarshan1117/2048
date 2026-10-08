@@ -1,5 +1,4 @@
 import '../game_state.dart';
-import '../merge_engine.dart';
 import 'booster.dart';
 
 /// Removes one selected block, then lets gravity and merges resolve.

@@ -5,7 +5,6 @@ import '../../../../app/localization/app_strings.dart';
 import '../../../levels/data/level_repository.dart';
 import '../../../progression/data/progress_repository.dart';
 import '../../../progression/domain/daily_reward_state.dart';
-import '../../../settings/domain/app_settings.dart';
 
 /// Everything the home screen needs to draw itself.
 class HomeState extends Equatable {

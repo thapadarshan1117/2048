@@ -7,7 +7,6 @@ import '../../../app/theme/app_radius.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/theme/app_typography.dart';
 import '../../../core/di/service_locator.dart';
-import '../../../core/services/purchase_service.dart';
 import '../../../core/widgets/game_button.dart';
 import '../../../core/widgets/gradient_scaffold.dart';
 import '../../../core/widgets/icon_action_button.dart';

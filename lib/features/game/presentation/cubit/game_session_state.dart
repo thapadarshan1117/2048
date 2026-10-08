@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../../levels/domain/level.dart';
 import '../../domain/game_state.dart';
-import '../../domain/game_mode.dart';
 import '../../domain/merge_event.dart';
 
 /// What the player is currently allowed to do.
